@@ -1,0 +1,28 @@
+package io;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class p11021 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int tc = Integer.parseInt(br.readLine().trim());
+		StringTokenizer st;
+		for (int i = 1; i <= tc; i++) {
+			st = new StringTokenizer(br.readLine().trim());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			bw.append("Case #" + i + ": " + String.valueOf(a + b) + "\n");
+		}
+		bw.flush();
+		bw.close();
+	}
+
+}
