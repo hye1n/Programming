@@ -14,14 +14,15 @@ public class p2748 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int n = Integer.parseInt(br.readLine().trim());
-		long[] fibonacci = new long[91];
-		fibonacci[0] = 0;
-		fibonacci[1] = 1;
+		long[] dp = new long[n + 1];
+		dp[0] = 0;
+		dp[1] = 1;
 		for (int i = 2; i <= n; i++) {
-			fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+			dp[i] = dp[i - 1] + dp[i - 2];
 		}
-		bw.append(fibonacci[n] + "\n");
+		bw.append(String.valueOf(dp[n]));
 		bw.flush();
 		bw.close();
 	}
+
 }
