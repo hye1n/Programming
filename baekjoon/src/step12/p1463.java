@@ -22,17 +22,12 @@ public class p1463 {
 		dp[1] = 0;
 		for (int i = 2; i <= n; i++) {
 			dp[i] = dp[i - 1] + 1; // 1을 빼는 방법
-			if (i % 3 == 0) {
-				int temp = dp[i / 3] + 1;// 3으로 나누어 떨어질떄 3으로 나누는 방법
-				if (dp[i] > temp) {
-					dp[i] = temp;
-				}
+			if (i % 3 == 0 && dp[i] > dp[i / 3] + 1) {
+				dp[i] = dp[i / 3] + 1;
+
 			}
-			if (i % 2 == 0) {
-				int temp = dp[i / 2] + 1;// 2로 나누어 떨이질때 2로 나누는 방법
-				if (dp[i] > temp) {
-					dp[i] = temp;
-				}
+			if (i % 2 == 0 && dp[i] > dp[i / 2] + 1) {
+				dp[i] = dp[i / 2] + 1;
 			}
 		}
 		bw.append(String.valueOf(dp[n]));
