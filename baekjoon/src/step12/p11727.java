@@ -17,7 +17,9 @@ public class p11727 {
 
 		int n = Integer.parseInt(br.readLine().trim());
 		dp = new int[n + 1];
-		System.out.println(solve(n));
+		bw.append(String.valueOf(solve(n)));
+		bw.flush();
+		bw.close();
 	}
 
 	// top-down ¹æ½Ä
