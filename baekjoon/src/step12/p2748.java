@@ -14,7 +14,8 @@ public class p2748 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int n = Integer.parseInt(br.readLine().trim());
-		long[] dp = new long[n + 1];
+		long[] dp = new long[91];
+
 		dp[0] = 0;
 		dp[1] = 1;
 		for (int i = 2; i <= n; i++) {
@@ -23,6 +24,6 @@ public class p2748 {
 		bw.append(String.valueOf(dp[n]));
 		bw.flush();
 		bw.close();
-	}
 
+	}
 }
