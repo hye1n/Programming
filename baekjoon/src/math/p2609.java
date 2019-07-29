@@ -26,10 +26,10 @@ public class p2609 {
 	}
 
 	public static int gcd(int a, int b) {
-		while (b > 0) {
-			int temp = b;
-			b = a % b;
-			a = temp;
+		while (b != 0) {
+			int r = a % b;
+			a = b;
+			b = r;
 		}
 		return a;
 	}
