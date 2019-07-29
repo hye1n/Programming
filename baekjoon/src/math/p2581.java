@@ -15,38 +15,26 @@ public class p2581 {
 
 		int m = Integer.parseInt(br.readLine().trim());
 		int n = Integer.parseInt(br.readLine().trim());
-		int[] arr = new int[n - m + 1];
-		int idx = 0;
-		for (int i = m; i <= n; i++) {
-			arr[idx++] = i;
-		}
-		int sumPrimeNum = 0;
-		int minPrimeNum = Integer.MAX_VALUE;
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == 1) {
+		boolean[] check = new boolean[n + 1];
+		check[0] = check[1] = true;
+		for (int i = 2; i * i <= n; i++) {
+			if (check[i] == true) {
 				continue;
 			}
-			int rootNum = (int) Math.sqrt(arr[i]);
-			boolean isPrime = true;
-			for (int j = 2; j <= rootNum; j++) {
-				if (arr[i] % j == 0) {
-					isPrime = false;
-					break;
-				}
-				isPrime = true;
-			}
-			if (isPrime) {
-				sumPrimeNum += arr[i];
-				if (arr[i] < minPrimeNum) {
-					minPrimeNum = arr[i];
-				}
+			for (int j = i + i; j <= n; j += i) {
+				check[j] = true;
 			}
 		}
-		if (sumPrimeNum == 0) {
-			bw.append(String.valueOf(-1));
-		} else {
-			bw.append(sumPrimeNum + "\n" + minPrimeNum);
+		int sum = 0;
+		int min = Integer.MAX_VALUE;
+		for (int i = m; i <= n; i++) {
+			if (check[i] == false) {
+				sum += i;
+				min = min > i ? i : min;
+			}
 		}
+		String answer = (sum == 0) ? String.valueOf(-1) : sum + "\n" + min;
+		bw.append(answer);
 		bw.flush();
 		bw.close();
 	}

@@ -15,20 +15,18 @@ public class p1929 {
 		String[] input = br.readLine().split(" ");
 		int m = Integer.parseInt(input[0]);
 		int n = Integer.parseInt(input[1]);
-		for (int i = m; i <= n; i++) {
-			if (i == 1) {
+		boolean[] check = new boolean[n + 1];
+		check[0] = check[1] = true;
+		for (int i = 2; i * i <= n; i++) {
+			if (check[i] == true) {
 				continue;
 			}
-			int root = (int) Math.sqrt(i);
-			boolean isPrime = true;
-			for (int r = 2; r <= root; r++) {
-				if (i % r == 0) {
-					isPrime = false;
-					break;
-				}
-				isPrime = true;
+			for (int j = i + i; j <= n; j += i) {
+				check[j] = true;
 			}
-			if (isPrime) {
+		}
+		for (int i = m; i <= n; i++) {
+			if (check[i] == false) {
 				bw.append(i + "\n");
 			}
 		}
