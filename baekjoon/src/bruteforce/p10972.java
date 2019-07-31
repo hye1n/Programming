@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 
 public class p10972 {
 
@@ -32,23 +31,24 @@ public class p10972 {
 	}
 
 	public static boolean nextPermutation(int[] arr, int n) {
-		int idx = -1;
-		for (int i = n - 1; i > 0; i--) {
-			if (arr[i] >= arr[i - 1]) {
-				idx = i;
-				break;
-			}
+		int i = n - 1;
+		while (i > 0 && arr[i] <= arr[i - 1]) {
+			i -= 1;
 		}
-		if (idx == -1) {
+		if (i <= 0) {
 			return false;
 		}
-		for (int j = n - 1; j >= idx; j--) {
-			if (arr[idx - 1] <= arr[j]) {
-				swap(arr, idx - 1, j);
-				break;
-			}
+		int j = n - 1;
+		while (arr[j] <= arr[i - 1]) {
+			j -= 1;
 		}
-		Arrays.sort(arr, idx, n);
+		swap(arr, i - 1, j);
+		j = n - 1;
+		while (i < j) {
+			swap(arr, i, j);
+			i += 1;
+			j -= 1;
+		}
 		return true;
 	}
 
