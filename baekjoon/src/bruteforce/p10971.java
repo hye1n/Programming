@@ -26,6 +26,11 @@ public class p10971 {
 		}
 		int min = Integer.MAX_VALUE;
 		do {
+			if (arr[0] != 0) {
+				break;
+			}
+			// 1 2 3 4 , 2 3 4 1, 3 4 1 2, 4 1 2 3 은 모두 같은 경우이기 때문에
+			// 시작점을 고정!
 			boolean connected = true;
 			int temp = 0;
 			for (int i = 0; i < n - 1; i++) {
