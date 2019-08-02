@@ -1,47 +1,35 @@
 package bruteforce;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class p1759 {
 
-	public static ArrayList<String> str = new ArrayList<>();
-
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		String[] input = br.readLine().split(" ");
-		int n = Integer.parseInt(input[0]); // 암호길이
-		int c = Integer.parseInt(input[1]);// 전체 알파벳 개수
-		String[] alpha = br.readLine().split(" ");
-		Arrays.sort(alpha);
-		makePassword(n, alpha, "", 0);
-		for (int i = 0; i < str.size(); i++) {
-			bw.append(str.get(i) + "\n");
-		}
-		bw.flush();
-		bw.close();
+		int n = Integer.parseInt(input[0]);
+		int c = Integer.parseInt(input[1]);
+		input = br.readLine().split(" ");
+		Arrays.sort(input);
+		solve(n, input, 0, "");
 	}
 
-	public static void makePassword(int n, String[] alpha, String password, int i) {
+	public static void solve(int n, String[] arr, int i, String password) {
 		if (password.length() == n) {
 			if (check(password)) {
-				str.add(password);
+				System.out.println(password);
 			}
 			return;
 		}
-		if (i >= alpha.length) {// 이걸 먼저 수행하면 password.length가 4여도 그냥 return됨
+		if (i >= arr.length) {
 			return;
 		}
-		makePassword(n, alpha, password + alpha[i], i + 1);// 지금 단어 사용
-		makePassword(n, alpha, password, i + 1);// 지금 단어 사용 안함
-
+		solve(n, arr, i + 1, password + arr[i]);
+		solve(n, arr, i + 1, password);
 	}
 
 	public static boolean check(String password) {
@@ -55,11 +43,7 @@ public class p1759 {
 				vowel += 1;
 			}
 		}
-		if (consonant >= 1 && vowel >= 2) {
-			return true;
-		} else {
-			return false;
-		}
+		return consonant >= 1 && vowel >= 2;
 	}
 
 }
