@@ -26,6 +26,9 @@ public class p14226 {
 			Pair p = queue.poll();
 			int s = p.screen;
 			int c = p.clipboard;
+			if (s == n) {
+				break;
+			}
 			if (time[s][s] == -1) {// 화면에 있는걸 모두 클립보드에 복사했을 경우
 				time[s][s] = time[s][c] + 1;
 				queue.add(new Pair(s, s));
@@ -39,15 +42,13 @@ public class p14226 {
 				queue.add(new Pair(s - 1, c));
 			}
 		}
-		int ans = -1;
+		int min = Integer.MAX_VALUE;
 		for (int i = 0; i <= n; i++) {
 			if (time[n][i] != -1) {
-				if (ans == -1 || ans > time[n][i]) {// n개 있을때 시간중 최소값 찾기
-					ans = time[n][i];
-				}
+				min = Math.min(min, time[n][i]);
 			}
 		}
-		System.out.println(ans);
+		System.out.println(min);
 
 	}
 
