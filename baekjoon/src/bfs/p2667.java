@@ -8,27 +8,26 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class p2667 {
-	static int[][] map;
-	static boolean[][] visited;
 	static int[] dx = { -1, 1, 0, 0 };
 	static int[] dy = { 0, 0, -1, 1 };
 
-	public static void main(String[] agrs) throws IOException {
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
-		map = new int[n][n];
-		visited = new boolean[n][n];
+		int[][] map = new int[n][n];
+		boolean[][] visited = new boolean[n][n];
 		for (int i = 0; i < n; i++) {
-			String input = br.readLine();
+			String line = br.readLine();
 			for (int j = 0; j < n; j++) {
-				map[i][j] = input.charAt(j) - '0';
+				map[i][j] = line.charAt(j) - '0';
 			}
 		}
 		int cnt = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				if (map[i][j] == 1 && !visited[i][j]) {
-					bfs(i, j, ++cnt, n);
+				if (!visited[i][j] && map[i][j] == 1) {
+					bfs(visited, map, i, j, ++cnt, n);
 				}
 			}
 		}
@@ -36,7 +35,7 @@ public class p2667 {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (map[i][j] != 0) {
-					ans[map[i][j] - 1]++;
+					ans[map[i][j] - 1] += 1;
 				}
 			}
 		}
@@ -47,20 +46,20 @@ public class p2667 {
 		}
 	}
 
-	public static void bfs(int x, int y, int cnt, int n) {
+	public static void bfs(boolean[][] visited, int[][] map, int x, int y, int cnt, int n) {
 		Queue<Pair> queue = new LinkedList<Pair>();
 		visited[x][y] = true;
-		map[x][y] = cnt;
 		queue.add(new Pair(x, y));
+		map[x][y] = cnt;
 		while (!queue.isEmpty()) {
 			Pair p = queue.poll();
 			x = p.x;
 			y = p.y;
-			for (int k = 0; k < 4; k++) {
-				int nx = x + dx[k];
-				int ny = y + dy[k];
+			for (int i = 0; i < 4; i++) {
+				int nx = x + dx[i];
+				int ny = y + dy[i];
 				if (nx >= 0 && ny >= 0 && nx < n && ny < n) {
-					if (map[nx][ny] == 1 && !visited[nx][ny]) {
+					if (!visited[nx][ny] && map[nx][ny] == 1) {
 						visited[nx][ny] = true;
 						map[nx][ny] = cnt;
 						queue.add(new Pair(nx, ny));
@@ -68,6 +67,7 @@ public class p2667 {
 				}
 			}
 		}
+
 	}
 
 	static class Pair {
