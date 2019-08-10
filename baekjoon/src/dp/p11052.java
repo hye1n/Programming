@@ -12,8 +12,8 @@ public class p11052 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int[] dp = new int[n + 1];
 		int[] p = new int[n + 1];
+		int[] dp = new int[n + 1];
 		for (int i = 1; i <= n; i++) {
 			p[i] = Integer.parseInt(st.nextToken());
 		}
