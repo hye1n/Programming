@@ -15,7 +15,6 @@ public class p9095 {
 		dp[2] = 2;
 		for (int i = 3; i <= 11; i++) {
 			dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-			dp[i] %= 1000000009;
 		}
 		int tc = Integer.parseInt(br.readLine());
 		while (tc-- > 0) {
